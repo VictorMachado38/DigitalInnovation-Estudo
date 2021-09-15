@@ -2,6 +2,15 @@
 
   <h2> Course list </h2>
 
+  <div class="form-group row">
+
+        <label class="col-sm-2 col-form-label">Filter By:</label>
+        <div class="col-sm-10">
+          <input [(ngModel)]="filter" class="form-control">
+        </div>
+  </div>
+
+
   <table class="table table-striped">
     <thead>
     <tr><!-- coloca a barra -->
@@ -9,24 +18,27 @@
       <th>Name</th>
       <th>Price</th>
       <th>Code</th>
+      <th>Release Date</th>
       <th>Rating</th>
       <th>Options</th>
-      <td></td>
-      <td></td>
-      <td></td>
+
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let course of couses">
-        <td>{{ course.imageUrl }}</td>
+      <tr *ngFor="let course of filterCourses">
+        <td><img [src]="course.imageUrl" width="50px" height="50px"> </td>
         <td>{{ course.name }}</td>
         <td>{{ course.price }}</td>
         <td>{{ course.code }}</td>
         <td>{{ course.releaseDate }}</td>
-        <td>{{ course.rating }}</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>
+
+          <app-star [rating]="course.rating"> </app-star>
+
+
+        </td>
+        <th>Options</th>
+
       </tr>
     </tbody>
 
