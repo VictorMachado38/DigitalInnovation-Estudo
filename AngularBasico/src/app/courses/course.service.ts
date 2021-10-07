@@ -11,6 +11,10 @@ export class  CourseService {
     return COURSES;
   }
 
+    retriveById(id: number): Course{
+      return <Course>COURSES.find((courseInterator: Course) => courseInterator.id === id);
+    }
+
 
 }
 
