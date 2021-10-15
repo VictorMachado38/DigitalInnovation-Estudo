@@ -21,8 +21,20 @@ export class CourseListCompoment implements OnInit{
   }
 
   ngOnInit(): void {
-    this._couses= this.courseService.retriveAll();
-    this.filterCourses = this._couses;
+   // this._couses= this.courseService.retriveAll();
+    //this.filterCourses = this._couses;
+    this.retriveAll();
+  }
+
+  retriveAll(): void{
+
+     this.courseService.retriveAll().subscribe({
+       next: courses => {
+         this._couses = courses;
+         this.filterCourses = this._couses;
+       },
+       error: err => console.log('Error',err)
+     });
 
   }
 

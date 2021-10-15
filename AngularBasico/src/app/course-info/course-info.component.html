@@ -7,13 +7,68 @@
 <h2>Course info</h2>
 <hr>
 <div>
-  <form>
+  <form #courseForm="ngForm" *ngIf="course">
     <div class="form-group row">
       <label class="col-sm-2 col-form-label">Name</label>
       <div class="col-sm-10">
-        <input  class="form-control">
+        <input [(ngModel)]="course.name" required name="name" #courseName="ngModel" [ngClass]="{'is-invalid':courseName.invalid}"  class="form-control">
+      <div class="invalid-feedback">
+        <samp>Course name is required</samp>
+      </div>
       </div>
     </div>
+    <br>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Price</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="course.price" required name="price" type="number" #coursePrice="ngModel" [ngClass]="{'is-invalid':coursePrice.invalid}"  class="form-control">
+        <div class="invalid-feedback">
+          <samp>Course price is required</samp>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Code</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="course.code" required name="code" #courseCode="ngModel"  [ngClass]="{'is-invalid':courseCode.invalid}"  class="form-control">
+        <div class="invalid-feedback">
+          <samp>Course code is required</samp>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Description</label>
+      <div class="col-sm-10">
+        <textarea [(ngModel)]="course.description" required name="description" #courseDescrition="ngModel" [ngClass]="{'is-invalid':courseDescrition.invalid}"  class="form-control"> </textarea>
+        <div class="invalid-feedback">
+          <samp>Course description is required</samp>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Rating</label>
+      <div class="col-sm-10">
+        <input [(ngModel)]="course.rating" required name="rating" type="number" #courseRating="ngModel" [ngClass]="{'is-invalid':courseRating.invalid}"  class="form-control">
+        <div class="invalid-feedback">
+          <samp>Course rating is required</samp>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <button [disabled]="courseForm.invalid"  (click)="salvar()"   class="btn btn-primary me-2">Save</button>
+    <button [routerLink]="'/courses'" class="btn btn-secondary me-2">Back</button>
+
+
+
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <h2>Valor : {{ courseName.value }}</h2>
+    <h2> COURSE ID AUX: {{ aux }}</h2>
+    <h2> COURSE ID VALID: {{ courseName.invalid }}</h2>
   </form>
 </div>
 </body>

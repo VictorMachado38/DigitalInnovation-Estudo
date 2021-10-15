@@ -1,5 +1,8 @@
 import {Course} from "./course";
 import {Inject, Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +10,59 @@ import {Inject, Injectable} from "@angular/core";
 
 export class  CourseService {
 
-  retriveAll(): Course[]{
-    return COURSES;
+  private coursesURL: String = 'http://localhost:3100/api/courses';
+
+  constructor(
+    private httpClient: HttpClient,
+    private snackbar: MatSnackBar)
+  {}
+
+  retriveAll(): Observable<Course[]>{
+    //return COURSES; esse aqui pega direto na classe
+    // @ts-ignore
+    return this.httpClient.get<Course[]>(this.coursesURL);
   }
 
-    retriveById(id: number): Course{
-      return <Course>COURSES.find((courseInterator: Course) => courseInterator.id === id);
+  retriveAllConstade(): Course[]{
+    return COURSES;// esse aqui pega direto na classe
     }
 
+    retriveById(id: number): Observable<Course>{
+      //return <Course>COURSES.find((courseInterator: Course) => courseInterator.id === id);
+      return   this.httpClient.get<Course>(`${this.coursesURL}/${id}`);
+  }
+
+
+ /*
+  retriveById(id: number | null): Course | undefined{
+    return COURSES.find((courseInterator: Course) => courseInterator.id === id);
+  }
+
+    save(course: Course): void{
+      if(course.id){
+          const index = COURSES.findIndex((courseInterator: Course) => courseInterator.id === course.id);
+          COURSES[index] = course;
+      }
+    }
+*/
+  save(course: Course): Observable<Course>{
+    if(course.id){
+    return this.httpClient.put<Course>(`${this.coursesURL}/${course.id}`, course);
+    }
+    else {
+      return this.httpClient.post<Course>(`${this.coursesURL}`, course);
+    }
+  }
+
+
+  showMessage(msg: string, isError: boolean = false): void{
+    this.snackbar.open(msg, 'X', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
+      panelClass: isError ? ['msg-error'] : ['msg-success'],
+    });
+  }
 
 }
 

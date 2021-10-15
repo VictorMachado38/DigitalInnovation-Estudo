@@ -10,6 +10,10 @@ import {NavBarComponent} from './nav.bar/nav-bar.component';
 import {RouterModule} from "@angular/router";
 import { Error404ComponentComponent } from './error404-component/error404-component.component';
 import { CourseInfoComponent } from './course-info/course-info.component';
+import { HttpClientModule } from "@angular/common/http";
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -26,6 +30,8 @@ import { CourseInfoComponent } from './course-info/course-info.component';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
+    MatSnackBarModule,
     RouterModule.forRoot([
       {
         path: '', redirectTo: 'courses',pathMatch: 'full'
@@ -39,7 +45,8 @@ import { CourseInfoComponent } from './course-info/course-info.component';
       {
         path: '**' , component: Error404ComponentComponent
       }
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
