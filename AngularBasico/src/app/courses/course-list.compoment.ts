@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {Course} from "./course";
 import {CourseService} from "./course.service";
+import {Location} from '@angular/common';
+
 
 @Component({
   //selector: 'app-course-list',
@@ -16,7 +18,9 @@ export class CourseListCompoment implements OnInit{
   _filterby!: string;
 
 
-  constructor(private courseService: CourseService) {
+  constructor(
+    private courseService: CourseService,
+    private location: Location) {
 
   }
 
@@ -26,18 +30,36 @@ export class CourseListCompoment implements OnInit{
     this.retriveAll();
   }
 
+
   retriveAll(): void{
 
      this.courseService.retriveAll().subscribe({
        next: courses => {
          this._couses = courses;
          this.filterCourses = this._couses;
+
        },
        error: err => console.log('Error',err)
      });
 
   }
 
+
+  deletarPeloID(courseID: number): void{
+    this.courseService.delete(courseID).subscribe({
+      next: () => {
+        console.log("Deletado com sucesso");
+        this.courseService.showMessage("DELETADO ID: "+courseID+" JA FOI TARDE")
+        alert("Clique em ok para relogar a pagina");
+        //await sleep(1000);
+        //this.courseService.Esperar(10);
+
+        // location.reload();
+
+      },
+      error: err => console.log("O erro foi no deletarPeloID, ERRO:" , err)
+    })
+  }
   set filter(value: string){
     this._filterby = value;
 

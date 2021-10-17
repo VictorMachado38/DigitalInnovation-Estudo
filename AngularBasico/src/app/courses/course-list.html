@@ -38,8 +38,10 @@
 
         </td>
         <td>
-          <a [routerLink]="['/courses/info' , course.id]" class="btn btn-primary"> Options</a>
-          </td>
+          <a [routerLink]="['/courses/info' , course.id]" class="btn btn-primary me-2"> Options</a>
+          <button  (click)="deletarPeloID(course.id)"  class="btn btn-danger me-2">Delete</button>
+
+        </td>
 
       </tr>
     </tbody>

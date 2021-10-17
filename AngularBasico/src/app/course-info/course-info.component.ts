@@ -24,9 +24,11 @@ export class CourseInfoComponent implements OnInit {
   aux!: String | null;
 
   ngOnInit(): void {
-      this.aux = this.activatedRoute.snapshot.paramMap.get('id');
+
+
+    this.aux = this.activatedRoute.snapshot.paramMap.get('id');
     var p = parseInt(<string>this.aux);
-      var g = parseFloat(<string>this.aux);
+    var g = parseFloat(<string>this.aux);
     var x = this.aux ;
     //this.course = this.courseService.retriveById(parseFloat(<string>this.activatedRoute.snapshot.paramMap.get('id')));
     this.courseService.retriveById(parseFloat(<string>this.activatedRoute.snapshot.paramMap.get('id'))).subscribe({
@@ -35,14 +37,21 @@ export class CourseInfoComponent implements OnInit {
 
     });
 
+
+
     //this.course = this.courseService.retriveById(this.activatedRoute.snapshot.paramMap.get('id'));
 
-     // @ts-ignore
+    // @ts-ignore
 //    var y: number = +x;
 
-  //  this.course = this.courseService.retriveById(2);
+    //  this.course = this.courseService.retriveById(2);
 
-      //this.courseName = this.activatedRoute.snapshot.paramMap.get('name');
+    //this.courseName = this.activatedRoute.snapshot.paramMap.get('name');
+  }
+
+  retriveAll(): void{
+
+
   }
 
   salvar(): void {
@@ -53,6 +62,8 @@ export class CourseInfoComponent implements OnInit {
     this.courseService.showMessage("Teoricamente está salvo",false)
     //this.courseService.showMessage('Cliente Salvo com sucesso!', false);
   }
+
+
 
 
 }

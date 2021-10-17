@@ -14,33 +14,29 @@ import { HttpClientModule } from "@angular/common/http";
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {CourseModule} from "./courses/course.module";
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        CourseListCompoment,
-        StarComponet,
-        ReplacePipe,
+        //CourseListCompoment,
+       // StarComponet,
+       // ReplacePipe,
         NavBarComponent,
-        Error404ComponentComponent,
-        CourseInfoComponent
+        Error404ComponentComponent
+        //CourseInfoComponent
 
     ],
   imports: [
     BrowserModule,
-    FormsModule,
+    //FormsModule,
     HttpClientModule,
     MatSnackBarModule,
+    CourseModule,
     RouterModule.forRoot([
       {
         path: '', redirectTo: 'courses',pathMatch: 'full'
-      },
-      {
-        path: 'courses', component: CourseListCompoment
-      },
-      {
-        path: 'courses/info/:id', component: CourseInfoComponent
       },
       {
         path: '**' , component: Error404ComponentComponent

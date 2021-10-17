@@ -54,16 +54,35 @@ export class  CourseService {
     }
   }
 
+  delete(id: number): Observable<any>{
+    return this.httpClient.delete<any>(`${this.coursesURL}/${id}`);
+  }
+
 
   showMessage(msg: string, isError: boolean = false): void{
     this.snackbar.open(msg, 'X', {
-      duration: 3000,
+      duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'bottom',
       panelClass: isError ? ['msg-error'] : ['msg-success'],
     });
   }
 
+
+  Esperar(timer: number):void{
+
+    async function init() {
+      console.log(1);
+      await sleep(10000000);
+      console.log(2);
+    }
+
+    function sleep(ms: number) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      });
+    }
+  }
 }
 
 var COURSES: Course[] = [
