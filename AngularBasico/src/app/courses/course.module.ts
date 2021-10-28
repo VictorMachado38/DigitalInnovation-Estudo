@@ -4,20 +4,22 @@ import {CourseListCompoment} from "./course-list.compoment";
 import {Router, RouterModule} from "@angular/router";
 import {Error404ComponentComponent} from "../error404-component/error404-component.component";
 import {FormsModule} from "@angular/forms";
-import {ReplacePipe} from "../pipe/replace.pipe";
+import {ReplacePipe} from "../shared/pipe/replace.pipe";
 import {CommonModule} from "@angular/common";
-import {StarComponet} from "../star/star.componet";
+import {StarComponet} from "../shared/component/star/star.componet";
+import {StarModule} from "../shared/component/star/star.module";
+import {AppPipeModule} from "../shared/pipe/app-pipe.module";
 
 @NgModule({
   declarations:[
     CourseListCompoment,
-    CourseInfoComponent,
-    ReplacePipe,
-    StarComponet
+    CourseInfoComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    StarModule,
+    AppPipeModule,
     RouterModule.forChild([
       {
         path: 'courses', component: CourseListCompoment
@@ -28,6 +30,4 @@ import {StarComponet} from "../star/star.componet";
     ])
   ]
 })
-export class CourseModule{
-
-}
+export class CourseModule{ }
